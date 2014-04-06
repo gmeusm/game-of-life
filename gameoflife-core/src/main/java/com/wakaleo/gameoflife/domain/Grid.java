@@ -8,11 +8,11 @@ public class Grid {
     private static final int DEFAULT_ROW_COUNT = 3;
     private static final int DEFAULT_COLUMN_COUNT = 3;
 
-    private Cell[][] cells;
+    private final Cell[][] cells;
 
 
-    private GridReader gridReader = new GridReader();
-    private GridWriter gridWriter = new GridWriter();
+    private final GridReader gridReader = new GridReader();
+    private final GridWriter gridWriter = new GridWriter();
 
     public Grid(final String gridContents) {
         this.cells = makeCellArrayFrom(gridContents);
@@ -105,9 +105,7 @@ public class Grid {
     public Cell[][] getContents() {
         Cell[][] contentCopy = new Cell[getHeight()][getWidth()];
         for (int row = 0; row < getHeight(); row++) {
-            for (int column = 0; column < getWidth(); column++) {
-                contentCopy[row][column] = cells[row][column];
-            }
+            System.arraycopy(cells[row], 0, contentCopy[row], 0, getWidth());
         }
         return contentCopy;
     }
